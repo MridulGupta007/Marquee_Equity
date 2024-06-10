@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useState } from "react";
+import { DataContext } from "./Context/Context";
+import { Outlet } from "react-router-dom";
 
 function App() {
+  const [booksData, setBooksData] = useState([]);
+  const [responseReceived, setResponseReceived] = useState(false);
+  const [personalShelf, setPersonalShelf] = useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataContext.Provider
+      value={{
+        booksData,
+        setBooksData,
+        responseReceived,
+        setResponseReceived,
+        personalShelf,
+        setPersonalShelf,
+      }}
+    >
+      <div className="py-5 font-mono bg-[#E88D67] min-h-[100vh]">
+        <Outlet />
+      </div>
+   
+    </DataContext.Provider>
   );
 }
 
